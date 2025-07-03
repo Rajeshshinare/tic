@@ -2,40 +2,28 @@ import tkinter as tk
 import tkinter.messagebox
 
 root = tk.Tk()
-#tk.title('Tic Tac Toe Game')
- 
-#game board to hold data
 
 game_board = ["-", "-", "-",
               "-", "-", "-",
               "-", "-", "-"]
 
-# know if game over
 game_still_on = True
 
 winner = None
 
-# current player 
 current_player = "X"
-
-# Play game 
 def play_game():
 
-  # display game board
   display_game_board()
 
   while game_still_on:
 
-    # Handle a turn
     handle_turn(current_player)
 
-    # Check if game over
     check_if_game_over()
-
-    # Flip to the other player
+   
     flip_player()
   
-  # print the winner or tie
   if winner == "X" or winner == "O":
     print(" Congratulations" + winner + "you won!" )
   elif winner == None:
@@ -52,8 +40,6 @@ def display_game_board():
 
 
 def handle_turn(player):
-
-  # input spot from player
   print(player + "'s turn.")
   spot = input("Choose a spot from 1-9: ")
 
@@ -72,16 +58,12 @@ def handle_turn(player):
 
   game_board[spot] = player
 
-  # display game board
   display_game_board()
 
-# Check if game over
 def check_if_game_over():
   check_for_winner()
   check_for_tie()
 
-
-# Check winner
 def check_for_winner():
   
   global winner
@@ -89,7 +71,6 @@ def check_for_winner():
   row_winner = check_rows()
   column_winner = check_columns()
   diagonal_winner = check_diagonals()
-  # Determine the winner
   if row_winner:
     winner = row_winner
   elif column_winner:
@@ -109,7 +90,6 @@ def check_rows():
   
   if row_1 or row_2 or row_3:
     game_still_on = False
-  # Return  winner
   if row_1:
     return game_board[0] 
   elif row_2:
@@ -129,7 +109,6 @@ def check_columns():
   
   if column_1 or column_2 or column_3:
     game_still_on = False
-  # Return the winner
   if column_1:
     return game_board[0] 
   elif column_2:
@@ -148,14 +127,12 @@ def check_diagonals():
   
   if diagonal_1 or diagonal_2:
     game_still_on = False
-  # Return the winner
   if diagonal_1:
     return game_board[0] 
   elif diagonal_2:
     return game_board[2]
   else:
     return None
-#check tie
 def check_for_tie():
   
   global game_still_on
@@ -166,7 +143,6 @@ def check_for_tie():
   else:
     return False
 
-# Flip the current player 
 def flip_player():
   
   global current_player
@@ -175,7 +151,6 @@ def flip_player():
     current_player = "O"
   elif current_player == "O":
     current_player = "X"
-#play game
 play_game()
 
 root.mainloop()
